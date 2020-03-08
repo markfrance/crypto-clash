@@ -14,7 +14,8 @@
         "image": "AR-Drop-ARD-Airdrop-List-Image.png",
         "percentAmount":50,
         "angle":360,
-        "joined": true
+        "joined": true,
+        "participants": 1000
     },
     {
         "tokenName": "Bitcoins", 
@@ -31,7 +32,8 @@
         "image": "AR-Drop-Bitcoin-Airdrop-List-Image.png",
         "percentAmount":10,
         "angle":360,
-        "joined": false
+        "joined": false,
+        "participants": 2000
     },
     {
         "tokenName": "Ethereum", 
@@ -48,7 +50,8 @@
         "image": "AR-Drop-Ethereum-Airdrop-List-Image.png",
         "percentAmount":25,
         "angle":360,
-        "joined": true
+        "joined": true,
+        "participants": 500
     },
     {
         "tokenName": "Bitcoin Cash", 
@@ -65,7 +68,8 @@
         "image": "AR-Drop-Bitcoin-Cash-Airdrop-List-Image.png",
         "percentAmount":50,
         "angle":360,
-        "joined": false
+        "joined": false,
+        "participants": 1000
     },
     {
         "tokenName": "Sample Coins", 
@@ -82,7 +86,8 @@
         "image": "SampleCoin.png",
         "percentAmount":50,
         "angle":360,
-        "joined": false
+        "joined": false,
+        "participants": 1000
     },
     {
         "tokenName": "Test Coins", 
@@ -99,7 +104,8 @@
         "image": "TestCoin.png",
         "percentAmount":50,
         "angle":360,
-        "joined": false
+        "joined": false,
+        "participants": 1000
     },
     {
         "tokenName": "Trial Tokens", 
@@ -116,7 +122,8 @@
         "image": "TrialToken.png",
         "percentAmount":5,
         "angle":360,
-        "joined": false
+        "joined": false,
+        "participants": 1000
     },
     {
         "tokenName": "Xample Tokens", 
@@ -133,6 +140,7 @@
         "image": "XampleToken.png",
         "percentAmount":50,
         "angle":360,
-        "joined": true
+        "joined": true,
+        "participants": 1000
     }
 ]
