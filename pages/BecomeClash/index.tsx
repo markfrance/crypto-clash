@@ -10,9 +10,7 @@ import { NotificationIcon } from '../../components/Icons/NotificationIcon'
 import { useNavigationParam, useNavigation } from 'react-navigation-hooks';
 import {View, Image, StyleSheet, TouchableHighlight} from 'react-native';
 import { Button } from '../../components/Button';
-
 import { theme } from '../../theme';
-
 import Swiper from 'react-native-swiper';
 
 export const BecomeClash = withBackground(() => {
@@ -38,14 +36,12 @@ export const BecomeClash = withBackground(() => {
                  <Button title="CHOOSE GAME" onPress={() => navigate('GameList')}/>
              </Container>
              <Container justifyContent="center" alignItems="center" >
-                  <TouchableHighlight onPress={() => navigate('GameList')}>
-                    <Text margin={3} color={theme.colors.ccOrange} fontSize={3}> GO BACK </Text>
-                   </TouchableHighlight>
-                  <Text color="white" fontSize={3}> Don't have flappy bird yet? </Text>
-                  <Image source={require('../../assets/AppStore.png')}  />
+               <TouchableHighlight onPress={() => navigate('GameList')}>
+                  <Text margin={3} color={theme.colors.ccOrange} fontSize={3}> GO BACK </Text>
+                </TouchableHighlight>
+                <Text color="white" fontSize={3}> Don't have flappy bird yet? </Text>
+                <Image source={require('../../assets/AppStore.png')}  />
              </Container>
-
-
           </Container>
          
     );

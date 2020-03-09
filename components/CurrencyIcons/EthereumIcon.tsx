@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Svg } from 'expo';
-import { Circle, G, Path, Defs, ClipPath } from 'react-native-svg';
+import { Svg, Circle, G, Path, Defs, ClipPath } from 'react-native-svg';
 
 export const EthereumIcon = () => (
   <Svg width={64} height={64}>

@@ -20,7 +20,6 @@ import {
   DepositToDex,
   WithdrawFromDex,
   DexTransactionComplete,
-  SelectCurrency,
   HowTo,
   ClashList,
   WalletQRCodeScanner,
@@ -51,7 +50,8 @@ const clashStack = createStackNavigator(
 },
 {
   initialRouteName: 'ClashList',
-  headerMode: 'none'
+  headerMode: 'none',
+  transitionConfig: () => fadeIn()
 });
 
 const cryptoStack = createStackNavigator({
@@ -64,7 +64,6 @@ const cryptoStack = createStackNavigator({
     DepositToDex,
     WithdrawFromDex,
     DexTransactionComplete,
-    SelectCurrency,
     Menu,
     WalletHowTo,
     PlaceOrder,
@@ -72,7 +71,7 @@ const cryptoStack = createStackNavigator({
     DexHome
 },
 {
-  initialRouteName: 'SendEthereum',
+  initialRouteName: 'WalletHome',
   headerMode: 'none',
   transitionConfig: () => fromBottom(),
 });

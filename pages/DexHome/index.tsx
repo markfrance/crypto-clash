@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   withBackground,
   BackgroundColor,
 } from '../../components/withBackground';
 import { Container } from '../../components/Container';
 import { Text } from '../../components/Text';
-import { Image } from 'react-native';
+import { Image, Animated } from 'react-native';
 import { Input } from '../../components/Input';
 import { Footer } from '../../components/Footer';
 import { ChevronOutlineLeft } from '../../components/Icons/ChevronOutlineLeft';
@@ -15,12 +15,23 @@ import { Dimensions, GestureResponderEvent } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Button } from '../../components/Button';
+import { getCurrencySymbol } from '../../consts/getCurrencySymbol';
+import { currencyIcons } from '../../consts/currencyIcons';
+import { CurrencySpinner } from '../../components/CurrencySpinner/CurrencySpinner';
 
 export const DexHome = withBackground(() => {
   const transactionFee = useNavigationParam('transactionFee');
   const ethAmount = useNavigationParam('ethAmount');
   const transactionFeeUsd = useNavigationParam('transactionFeeUsd');
   const transactionId = useNavigationParam('transactionId');
+
+    const [selectedCurrencyIndex, setSelectedCurrencyIndex] = useState(0);
+  const [spinnerScrollAmount, setSpinnerScrollAmount] = useState(new Animated.Value(0));
+
+    const handleWheelScroll = (newSelectedIndex: number) => {
+   setSelectedCurrencyIndex(newSelectedIndex);
+  };
+
 
    const { navigate } = useNavigation();
 
@@ -53,10 +64,11 @@ export const DexHome = withBackground(() => {
          <Image source={require('../../assets/CC-Dex-Icon.png')} />
        </Container>
         <Container justifyContent="center" alignItems="center">
-          <Text color="white" fontSize={6}>
+          <Text color="white" fontSize={4}>
             Line up the assets you wish to trade
           </Text>
         </Container>
+        
         <Container justifyContent="center" alignItems="center">
           <Text color="white" fontSize={6}>
            ETH -> CLASH
@@ -65,9 +77,19 @@ export const DexHome = withBackground(() => {
            0.023 = 1
           </Text>
         </Container>
-        
-        <Container  width="100%" justifyContent="center" alignItems="center">
-          <Button title="Trade" />
+               <CurrencySpinner
+            selectedIndex={selectedCurrencyIndex}
+            scrollAmount={spinnerScrollAmount}
+            currencyIcons={currencyIcons}
+            handleScroll={handleWheelScroll}
+          />
+          <Container position="absolute" top={185} right={7}>
+           <Image source={require('../../assets/ClashToken.png')} />
+         </Container>
+        <Container position="absolute" top={300} width="100%" justifyContent="center" alignItems="center">
+          <Container width={7}>
+            <Button title="Trade" onPress={() => navigate("BasicDexTrade")}/>
+          </Container>
         </Container>
       </Container>
     </Container>

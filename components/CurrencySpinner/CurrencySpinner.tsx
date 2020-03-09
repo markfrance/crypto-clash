@@ -10,9 +10,17 @@ import { Wheel } from '../Wheel';
 // @ts-ignore
 import AnimatedMath from 'react-native-animated-math';
 import { getFixedValuesFromTotalRotation } from '../../consts/getFixedValuesFromTotalRotation';
+import {
+  BitcoinIcon,
+  StellarIcon,
+  LitecoinIcon,
+  EthereumIcon,
+  BitcoinCashIcon,
+  ZCashIcon
+} from '../CurrencyIcons';
 
 interface CurrencyIcon {
-  icon: () => JSX.Element;
+  icon:  () => JSX.Element;
   index: number;
 }
 
@@ -145,6 +153,32 @@ export const CurrencySpinner  = (props) => {
       : null;
   };
 
+  getIcon = (index) => {
+    switch(index){
+      case 0:
+         return <BitcoinIcon />
+         break;
+      case 1:
+         return <StellarIcon />
+         break;
+      case 2:
+         return <LitecoinIcon />
+         break;
+      case 3:
+         return <EthereumIcon />
+         break;
+      case 4:
+         return <BitcoinCashIcon />
+         break;
+      case 5:
+         return <ZCashIcon />
+         break;
+      default:
+         return <BitcoinIcon />
+         break;
+    }
+   
+  };
 
     return (
       <View style={{ flex: 1 }} {...getPanHandler()}>
@@ -175,7 +209,7 @@ export const CurrencySpinner  = (props) => {
             }}
           >
             <IconContainer top={118} left={-62}>
-              {icon.icon()}
+             {getIcon(icon.index)}
             </IconContainer>
           </Animated.View>
         ))}

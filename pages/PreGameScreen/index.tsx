@@ -2,23 +2,28 @@ import React, { Component } from 'react';
 import {
 	View, 
 	Image, 
-	Text,
 	StyleSheet, 
 	TouchableHighlight
 } from 'react-native';
+import { Container } from '../../components/Container';
+import { Text } from '../../components/Text';
+import {
+  BackgroundColor,
+  withBackground,
+} from '../../components/withBackground';
 
-export const PreGameScreen = () => {
+export const PreGameScreen = withBackground(() => {
 
   		return(
-  			<View>
-	  			<View>
-	  				<Text style={localStyles.header}> Clash Starts In </Text>
+  			<Container>
+	  			<Container width="100%" >
+	  				<Text fontSize={6} color="white"> Clash Starts In </Text>
 	  				<Text style={localStyles.timer}> 7h 16m 10s </Text>
-	  			</View>
-	  			<View>
+	  			</Container>
+	  			<Container>
 	  				<Text style={localStyles.subheader}>Clash Details</Text>
-	  				<View style={localStyles.leftBox}>
-	  					<View style={localStyles.leftColumn}>
+	  				<Container style={localStyles.leftBox}>
+	  					<Container style={localStyles.leftColumn}>
 	  						<Text style={localStyles.label}>Percentage</Text>
 	  						<Text style={localStyles.description}>VOLUME OF PRIZES TO JOIN</Text>
 	  						<Text style={localStyles.label}>Players</Text>
@@ -27,17 +32,17 @@ export const PreGameScreen = () => {
 	  						<Text style={localStyles.description}>TOTAL PLAYERS JOINED</Text>
 	  						<Text style={localStyles.label}>Entries</Text>
 	  						<Text style={localStyles.description}>ATTEMPS BY ALL PLAYERS</Text>
-	  					</View>
-	  					<View style={localStyles.rightColumn}>
+	  					</Container>
+	  					<Container style={localStyles.rightColumn}>
 	  						<Text style={localStyles.value}>1%</Text>
 	  						<Text style={localStyles.value}>1000</Text>
 	  						<Text style={localStyles.value}>88</Text>
 	  						<Text style={localStyles.value}>580</Text>
-	  					</View>
-	  				</View>
+	  					</Container>
+	  				</Container>
 	  				<Text style={localStyles.subheader}>Trade Volume</Text>
-	  				<View style={localStyles.leftBox}>
-	  					<View style={localStyles.leftColumn}>
+	  				<Container style={localStyles.leftBox}>
+	  					<Container style={localStyles.leftColumn}>
 	  						<Text style={localStyles.label}>24hr</Text>
 	  						<Text style={localStyles.description}>YOUR VOLUME IN THE PAST 24 HOURS</Text>
 	  						<Text style={localStyles.label}>Used</Text>
@@ -46,31 +51,31 @@ export const PreGameScreen = () => {
 	  						<Text style={localStyles.description}>AVAILABLE TO JOIN CLASHES</Text>
 	  						<Text style={localStyles.label}>Per Entry</Text>
 	  						<Text style={localStyles.description}>VOLUME REQUIRED PER ENTRY</Text>
-	  					</View>
-	  					<View style={localStyles.rightColumn}>
+	  					</Container>
+	  					<Container style={localStyles.rightColumn}>
 	  						<Text style={localStyles.value}>$66.50</Text>
 	  						<Text style={localStyles.value}>$65</Text>
 	  						<Text style={localStyles.value}>$2.90</Text>
 	  						<Text style={localStyles.value}>$2.90</Text>
-	  					</View>
-	  				</View>
+	  					</Container>
+	  				</Container>
 	  				<Text style={localStyles.subheader}>Prizes</Text>
-	  				<View style={localStyles.rightBox}>
+	  				<Container style={localStyles.rightBox}>
 	  					<Image source={require('../../assets/CryptoClash-List-Clash-Token.png')}  
           					 />
-          				<View style={localStyles.leftColumn}>
+          				<Container style={localStyles.leftColumn}>
           					<Text style={localStyles.label}>Total Prizes </Text>
-          				</View>
-          				<View style={localStyles.rightColumn}>
+          				</Container>
+          				<Container style={localStyles.rightColumn}>
           					<Text style={localStyles.value}> 100000 Clash</Text>
-          				</View>
+          				</Container>
           				<Text style={localStyles.description}> Once entries reach 1000 </Text>
-	  				</View>
+	  				</Container>
 
-	  			</View>
-  			</View>);
+	  			</Container>
+  			</Container>);
   		
-  }
+  }, BackgroundColor.Black);
 
 var localStyles = StyleSheet.create({
 	main:{

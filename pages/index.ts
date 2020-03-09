@@ -13,8 +13,6 @@ import { ReceiveEthereum } from './ReceiveEthereum';
 import { DepositToDex } from './DepositToDex';
 import { WithdrawFromDex } from './WithdrawFromDex';
 import { DexTransactionComplete } from './DexTransactionComplete';
-
-import { SelectCurrency } from './SelectCurrency';
 import { Wallet } from './Wallet';
 import { WalletQRCodeScanner } from './WalletQRCodeScanner';
 import { WalletHowTo } from './WalletHowTo';
@@ -46,7 +44,6 @@ export {
   DepositToDex,
   WithdrawFromDex,
   DexTransactionComplete,
-  SelectCurrency,
   Wallet,
   HowTo,
   WalletQRCodeScanner,

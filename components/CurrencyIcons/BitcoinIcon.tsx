@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Svg } from 'expo';
-import { Circle, Path } from 'react-native-svg';
+import Svg, { Circle, Path, LinearGradient, Stop } from 'react-native-svg';
 
 export const BitcoinIcon = () => (
   <Svg width={64} height={64}>

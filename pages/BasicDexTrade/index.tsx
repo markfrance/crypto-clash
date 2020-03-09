@@ -85,7 +85,7 @@ export const BasicDexTrade = withBackground(() => {
           </Text>
         </Container>
         <Container  width="100%" justifyContent="center" alignItems="center">
-          <Button title="Place Order" />
+          <Button title="Place Order" onPress={() => navigate("PlaceOrder")}/>
         </Container>
       </Container>
     </Container>

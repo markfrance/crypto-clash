@@ -1,5 +1,5 @@
 // @ts-ignore
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
 interface IconContainerProps {
   left: number;
@@ -18,7 +18,7 @@ export const IconContainer = styled.View<{ left: number; top: number }>`
 `;
 
 export const WheelContainer = styled.View`
-  opacity: 0.5;
+  opacity: 1;
   position: absolute;
   left: 0;
   top: 0;

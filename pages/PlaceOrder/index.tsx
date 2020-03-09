@@ -78,7 +78,7 @@ export const PlaceOrder = withBackground(() => {
           </Text>
         </Container>
         <Container  width="100%" justifyContent="center" alignItems="center">
-          <Button title="Trade History" />
+          <Button title="Trade History" onPress={() => navigate("TradeHistory")}/>
         </Container>
       </Container>
     </Container>

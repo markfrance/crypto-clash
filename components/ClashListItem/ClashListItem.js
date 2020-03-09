@@ -7,6 +7,8 @@ import {
 	TouchableHighlight,
 	Modal
 } from 'react-native';
+import { Container } from '../../components/Container';
+
 
 export default class ClashListItem extends Component {
 
@@ -36,11 +38,33 @@ export default class ClashListItem extends Component {
 
   getHeaderText() {
     if(this.props.clashItem.open){
-      return  <Text style={localStyles.buttonText}> {this.props.clashItem.value} {this.props.clashItem.tokenName}</Text>
+      return  (<Text style={localStyles.buttonText}> {this.props.clashItem.value} {this.props.clashItem.tokenName}</Text>);
     } else {
-     return <Text style={localStyles.buttonText}> Prize Timer Position</Text>
+     return (<Container width="100%"><Container><Text style={localStyles.buttonText}> Prize Timer Position</Text></Container>
+     <Container><Text style={localStyles.buttonText}> Timer</Text></Container>
+     <Container><Text style={localStyles.buttonText}> Position</Text></Container></Container>);
     
     }
+  }
+
+  handleItemPress() {
+    if(this.props.clashItem.open){
+      this.props.navigate('GameList');
+    } else {
+      this.props.navigate('PreGameScreen');
+    }
+
+  }
+
+  getBannerImage() {
+    if(this.props.clashItem.open){
+     return <Image source={require('../../assets/CryptoClash-List-Clash-Token.png')}  
+          style={localStyles.buttonImage} />
+    } else {
+      return <Image source={require('../../assets/Frappy.png')}  
+          style={localStyles.buttonImage} />
+        }
+    
   }
 
 	render() {
@@ -49,14 +73,14 @@ export default class ClashListItem extends Component {
    
     return(
 			<TouchableHighlight style={localStyles.buttons}
-            onPress={() => this.props.navigate('GameList')}
+            onPress={() => this.handleItemPress()}
              >
         <View style={localStyles.container}>
 
           {this.getHeaderText()}
          
-          <Image source={require('../../assets/CryptoClash-List-Clash-Token.png')}  
-          style={localStyles.buttonImage} />
+         {this.getBannerImage()}
+         
           <Image source={require('../../assets/GameTimerIcon.png')}
           style={localStyles.clockIcon} />
           <Text style={localStyles.airdropTimer}>{this.props.clashItem.participants}</Text> 
