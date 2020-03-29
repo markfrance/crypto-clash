@@ -17,6 +17,7 @@ import ClashListItem from '../../components/ClashListItem/ClashListItem.js';
 import UpcomingClashes from '../../data/upcomingclashes.json';
 import ActiveClashes from '../../data/activeclashes.json';
 import EndedClashes from '../../data/endedclashes.json';
+
 import { useNavigationParam, useNavigation } from 'react-navigation-hooks';
 
 const UpcomingButton = () => <Text style={localStyles.buttonText}>Open</Text>;

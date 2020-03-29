@@ -23,6 +23,8 @@ export const DexTransactionComplete = withBackground(() => {
 
    const { navigate } = useNavigation();
 
+   const { goBack } = useNavigation();
+
   return (
     <Container position="absolute" bottom={-64}>
       <Svg
@@ -44,7 +46,7 @@ export const DexTransactionComplete = withBackground(() => {
           <Text color={theme.colors.ccOrange} fontSize={6}>0.2 ETH</Text>
         </Container>
         <Container position="absolute" top={-40} left={15}>
-          <TouchableOpacity onPress={() => navigate('WalletHome')}>
+          <TouchableOpacity onPress={() => goBack()}>
            <ChevronOutlineLeft />
         </TouchableOpacity>
         </Container>

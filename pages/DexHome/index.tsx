@@ -5,11 +5,11 @@ import {
 } from '../../components/withBackground';
 import { Container } from '../../components/Container';
 import { Text } from '../../components/Text';
-import { Image, Animated } from 'react-native';
+import { Image, Animated, View } from 'react-native';
 import { Input } from '../../components/Input';
 import { Footer } from '../../components/Footer';
 import { ChevronOutlineLeft } from '../../components/Icons/ChevronOutlineLeft';
-import { useNavigationParam, useNavigation } from 'react-navigation-hooks';
+import { useNavigationParam, useNavigation, useFocusEffect } from 'react-navigation-hooks';
 import { theme } from '../../theme';
 import { Dimensions, GestureResponderEvent } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
@@ -18,6 +18,7 @@ import { Button } from '../../components/Button';
 import { getCurrencySymbol } from '../../consts/getCurrencySymbol';
 import { currencyIcons } from '../../consts/currencyIcons';
 import { CurrencySpinner } from '../../components/CurrencySpinner/CurrencySpinner';
+import { Wheel } from '../../components/Wheel';
 
 export const DexHome = withBackground(() => {
   const transactionFee = useNavigationParam('transactionFee');
@@ -28,67 +29,159 @@ export const DexHome = withBackground(() => {
     const [selectedCurrencyIndex, setSelectedCurrencyIndex] = useState(0);
   const [spinnerScrollAmount, setSpinnerScrollAmount] = useState(new Animated.Value(0));
 
+  const [scrollAmount, setScrollAmount] = useState(new Animated.Value(-Dimensions.get('window').height + 275));
+  const [rightSpinnerPosition, setRightSpinnerPosition] = useState(new Animated.Value(400));
+  const [leftSpinnerPosition, setLeftSpinnerPosition] = useState(new Animated.Value(-400));
+  const [containerOpacity, setContainerOpacity] = useState(new Animated.Value(1));
+
     const handleWheelScroll = (newSelectedIndex: number) => {
    setSelectedCurrencyIndex(newSelectedIndex);
   };
 
+const enterPage = () =>{
+    Animated.timing(scrollAmount, {
+        toValue: -Dimensions.get('window').height + 275,
+        duration: 0,
+      }).start();
+  Animated.timing(containerOpacity, {
+      toValue: 1,
+      duration: 400,
+    }).start();
+     Animated.timing(leftSpinnerPosition, {
+      toValue: 0,
+      duration: 400,
+    }).start();
+        Animated.timing(rightSpinnerPosition, {
+      toValue: 0,
+      duration: 400,
+    }).start();
+}
+
+  useFocusEffect(() => {
+ 
+       enterPage();
+   
+  });
+
+const leavePage = () => {
+    Animated.timing(scrollAmount, {
+        toValue: 0,
+        duration: 800,
+      }).start(() => {
+        goBack()
+      });
+    Animated.timing(containerOpacity, {
+      toValue: 0,
+      duration: 400,
+    }).start();
+     Animated.timing(leftSpinnerPosition, {
+      toValue: -400,
+      duration: 400,
+    }).start();
+        Animated.timing(rightSpinnerPosition, {
+      toValue: 1400,
+      duration: 400,
+    }).start();
+   
+  };
+
+
+  const closeMenu = () => {
+    Animated.timing(scrollAmount,{
+      toValue: 0,
+      duration:0
+    }).start();
+  }
 
    const { navigate } = useNavigation();
-
+   const { goBack } = useNavigation();
+   
   return (
-    <Container position="absolute" bottom={-64}>
-      <Svg
-          width={Dimensions.get('window').width}
-          height={858}
-          viewBox="0 0 825 858"
-        >
-          <Path
-            d="M0 181.615c3.252.4 6.48.974 9.67 1.72 43.07 12.29 86 25.23 129.2 36.86 30.4 8.17 61.16 15.17 92 21.59 21.54 4.49 43.4 7.75 65.25 10.36a546.99 546.99 0 0 0 57 3.92c26.83.36 50.57-8 70.64-26.92 16.1-15.19 29.17-32.62 41.72-50.54 17.91-25.56 34.87-51.8 53.31-77 13.39-18.28 27-36.49 44.42-51.53 25.67-22.08 54.66-37.19 87.67-44.89a195.85 195.85 0 0 1 58.39-4.71c35 2.44 67.68 12.82 97 32.56 6.17 4.15 11.84 9 17.74 13.58v262H0v-127z"
-            fill={theme.colors.ccOrange}
-          />
-          <Path d="M0 308h824v1200H0V308z" fill={theme.colors.ccOrange} />
-        </Svg>
-        
-      <Container position="absolute" bottom={-200} height="80%" width="100%">
+    <Container >
 
-        <Container position="absolute" top={-150} left={60}>
-          <Text color="white" fontSize={6}>Balance</Text>
-          <Text color={theme.colors.ccOrange} fontSize={6}>0.2 ETH</Text>
-        </Container>
-        <Container position="absolute" top={-40} left={15}>
-          <TouchableOpacity onPress={() => navigate('WalletHome')}>
-           <ChevronOutlineLeft />
-        </TouchableOpacity>
-        </Container>
-        <Container position="absolute" top={-100} right={15} >
-         <Image source={require('../../assets/CC-Dex-Icon.png')} />
-       </Container>
-        <Container justifyContent="center" alignItems="center">
-          <Text color="white" fontSize={4}>
-            Line up the assets you wish to trade
-          </Text>
-        </Container>
+    <Container >
+        <Footer
+         scrollAmount={scrollAmount}
+        />
+      </Container>
+
         
-        <Container justifyContent="center" alignItems="center">
-          <Text color="white" fontSize={6}>
-           ETH -> CLASH
-          </Text>
-          <Text color="white" fontSize={6}>
-           0.023 = 1
-          </Text>
-        </Container>
+      <Container position="absolute" bottom={-250} height="100%" width="100%">
+     
+          <Container position="absolute" top={-200} left={60}>
+           <Animated.View style={{opacity:containerOpacity}}>
+            <Text color="white" fontSize={6}>Balance</Text>
+            <Text color={theme.colors.ccOrange} fontSize={6}>0.2 ETH</Text>
+            </Animated.View>
+          </Container>
+          <Container position="absolute" top={-85} left={0}>
+           <Animated.View style={{opacity:containerOpacity}}>
+            <TouchableOpacity onPress={() => leavePage()}>
+             <ChevronOutlineLeft />
+          </TouchableOpacity>
+          </Animated.View>
+          </Container>
+          <Container position="absolute" top={-150} right={15} >
+           <Animated.View style={{opacity:containerOpacity}}>
+           <Image source={require('../../assets/CC-Dex-Icon.png')} />
+           </Animated.View>
+         </Container>
+          <Container position="absolute" top={-50} width="100%" justifyContent="center" alignItems="center">
+           <Animated.View style={{opacity:containerOpacity}}>
+            <Text color="white" fontSize={4}>
+              Line up the assets you wish to trade
+            </Text>
+            </Animated.View>
+          </Container>
+          
+          <Container position="absolute" width="100%" justifyContent="center" alignItems="center">
+           <Animated.View style={{opacity:containerOpacity}}>
+            <Text color="white" fontSize={6} textAlign='center'>
+             ETH -> CLASH
+            </Text>
+            <Text color="white" fontSize={6} textAlign='center'>
+             0.023 = 1
+            </Text>
+            </Animated.View>
+          </Container>
+
+          <Animated.View style={{
+        transform:[
+        {
+          translateX: leftSpinnerPosition
+        }
+        ]
+      }} >
                <CurrencySpinner
             selectedIndex={selectedCurrencyIndex}
             scrollAmount={spinnerScrollAmount}
             currencyIcons={currencyIcons}
             handleScroll={handleWheelScroll}
+            colorFrom='#383838' colorTo='#585858'
           />
-          <Container position="absolute" top={185} right={7}>
-           <Image source={require('../../assets/ClashToken.png')} />
-         </Container>
-        <Container position="absolute" top={300} width="100%" justifyContent="center" alignItems="center">
+          </Animated.View>
+   
+           <Animated.View style={{
+        transform:[
+        {
+          translateX: rightSpinnerPosition
+        }
+        ]
+      }} >
+         <View style={{ top: 300, transform: [{ rotate: "180deg" }] }}>
+          <Wheel colorFrom='#383838' colorTo='#585858' />
+         </View>
+           <Image style={{position:'absolute', top:110, right:70}}source={require('../../assets/ClashToken.png')} />
+         
+           </Animated.View>
+     
+          
+   
+        <Container position="absolute" top={250} width="100%" justifyContent="center" alignItems="center">
           <Container width={7}>
+           <Animated.View style={{opacity:containerOpacity}}>
             <Button title="Trade" onPress={() => navigate("BasicDexTrade")}/>
+            </Animated.View>
           </Container>
         </Container>
       </Container>

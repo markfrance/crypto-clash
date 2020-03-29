@@ -21,8 +21,6 @@ export default class leaderboardItem extends Component {
     }
   }
 
-
-
   _toTime(milliseconds) {
     const duration = moment.duration(milliseconds);
 
@@ -37,15 +35,15 @@ export default class leaderboardItem extends Component {
     
      return(
 
-      <View style={this.state.isHighlighted ? localStyles.highlightedRow : localStyles.row}>
+      <View style={this.props.leaderboardItem.isHighlighted ? localStyles.highlightedRow : localStyles.row}>
 
-        <Text style={localStyles.rowText}>{this.props.position + 1} </Text>
-
-        <Text style={localStyles.rowText}>{this.props.leaderboardItem.mode} </Text>
-
-        <Text style={localStyles.rowText}>{this.props.leaderboardItem.crypto} </Text>
+        <Text style={localStyles.rowText}>{this.props.leaderboardItem.player} </Text>
 
         <Text style={localStyles.rowText}>{this._toTime(this.props.leaderboardItem.time)} </Text>
+
+        <Text style={localStyles.rowText}>{this.props.leaderboardItem.attempts} </Text>
+
+        <Text style={localStyles.rowText}>{this.props.leaderboardItem.prize} </Text>
         
       </View>
            );
@@ -69,6 +67,7 @@ var localStyles = StyleSheet.create({
     backgroundColor: '#ffa028'
   },
   rowText : {
+     fontFamily:'Medel',
     height:18,
     fontSize:18,
     flex: 1, 

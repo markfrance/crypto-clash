@@ -7,8 +7,8 @@ import {
 	TouchableHighlight,
 	Modal
 } from 'react-native';
+import moment from 'moment';
 import { Container } from '../../components/Container';
-
 
 export default class ClashListItem extends Component {
 
@@ -17,7 +17,7 @@ export default class ClashListItem extends Component {
 
     this.state = {
       	joined : true,
-        timer : props.clashItem.startTime
+        timer : props.clashItem.startTime ?? 0
     }
   }
 
@@ -28,22 +28,54 @@ export default class ClashListItem extends Component {
     );
   }
 
-  componentDidUpdate(){
-    if(this.state.timer < 0){ 
-      this.setState({timer: 0});
-      clearInterval(this.interval);
-      //Start game
-    }
+
+  _toTime(seconds) {
+    const duration = moment.duration(seconds * 1000);
+
+    const pad = (n) => n >= 10 ? n : '0' + n;
+    
+    return pad(duration.hours()) + ':' + pad(duration.minutes()) + ':' +
+    pad(duration.seconds()) ;
   }
 
   getHeaderText() {
     if(this.props.clashItem.open){
-      return  (<Text style={localStyles.buttonText}> {this.props.clashItem.value} {this.props.clashItem.tokenName}</Text>);
+      return  (<Text style={localStyles.headerText}> {this.props.clashItem.value} {this.props.clashItem.tokenName}</Text>);
+    } 
+
+    if(this.state.timer > 0){
+       return (<View style={{flex:'1', alignItems: 'stretch', flexDirection: 'row'}}>
+       <View style={{flex:'1',alignItems: 'stretch', flexDirection: 'row'}} >
+         <Text style={localStyles.prizeText}> 1000</Text>
+         <Image  style={{ position:'absolute', left:70, top:-5, width:'auto', resizeMode:'contain', width:20}} 
+         source={require('../../assets/clashsmallicon.png')}   />
+       </View>
+        <View style={{flex:'1',alignItems: 'stretch', flexDirection: 'row'}} >
+         <Text style={localStyles.timerText}> {this._toTime(this.state.timer)}</Text>
+           <Image  style={{ position:'absolute', left:80, top:-3, width:'auto', resizeMode:'contain', width:20}} 
+           source={require('../../assets/countdowntimer.png')}   />
+       </View>
+        <View style={{flex:'1',alignItems: 'stretch', flexDirection: 'row'}} >
+         <Text style={localStyles.positionText}> 1st</Text>
+           <Image  style={{ marginRight:10, top:-3, width:'auto', resizeMode:'contain', width:20}} 
+           source={require('../../assets/prizecup.png')}   />
+       </View>
+      
+     </View>);
     } else {
-     return (<Container width="100%"><Container><Text style={localStyles.buttonText}> Prize Timer Position</Text></Container>
-     <Container><Text style={localStyles.buttonText}> Timer</Text></Container>
-     <Container><Text style={localStyles.buttonText}> Position</Text></Container></Container>);
-    
+       return (<View style={{flex:'1', alignItems: 'stretch', flexDirection: 'row'}}>
+        <View style={{flex:'1',alignItems: 'stretch', flexDirection: 'row'}} >
+         <Text style={localStyles.prizeText}> 1000</Text>
+         <Image  style={{ position:'absolute', left:70, top:-5, width:'auto', resizeMode:'contain', width:20}} 
+         source={require('../../assets/clashsmallicon.png')}   />
+         </View>
+       <Text style={localStyles.timerText}> </Text>
+        <View style={{flex:'1',alignItems: 'stretch', flexDirection: 'row'}} >
+         <Text style={localStyles.positionText}> 1st</Text>
+           <Image  style={{ marginRight:10, top:-3, width:'auto', resizeMode:'contain', width:20}} 
+           source={require('../../assets/prizecup.png')}   />
+       </View>
+     </View>);
     }
   }
 
@@ -53,7 +85,6 @@ export default class ClashListItem extends Component {
     } else {
       this.props.navigate('PreGameScreen');
     }
-
   }
 
   getBannerImage() {
@@ -61,10 +92,23 @@ export default class ClashListItem extends Component {
      return <Image source={require('../../assets/CryptoClash-List-Clash-Token.png')}  
           style={localStyles.buttonImage} />
     } else {
-      return <Image source={require('../../assets/Frappy.png')}  
-          style={localStyles.buttonImage} />
-        }
+      return <Image source={require('../../assets/Frappy.png')} style={localStyles.buttonImage} />
+    }
     
+  }
+
+  getOpenDisplay() {
+    if(this.props.clashItem.open){
+      return(
+        <View>
+         <Image source={require('../../assets/GameTimerIcon.png')}
+          style={localStyles.clockIcon} />
+          <Text style={localStyles.airdropTimer}>{this.props.clashItem.participants}</Text> 
+          <Image source={require('../../assets/EmptyIcon.png')}
+          style={localStyles.percentIcon} />
+          <Text style={localStyles.percentAmount}> {this.props.clashItem.percentAmount}%</Text>
+          </View>);
+    }
   }
 
 	render() {
@@ -81,12 +125,8 @@ export default class ClashListItem extends Component {
          
          {this.getBannerImage()}
          
-          <Image source={require('../../assets/GameTimerIcon.png')}
-          style={localStyles.clockIcon} />
-          <Text style={localStyles.airdropTimer}>{this.props.clashItem.participants}</Text> 
-          <Image source={require('../../assets/EmptyIcon.png')}
-          style={localStyles.percentIcon} />
-          <Text style={localStyles.percentAmount}> {this.props.clashItem.percentAmount}%</Text>
+         {this.getOpenDisplay()}
+         
         
         </View>
            
@@ -113,12 +153,39 @@ var localStyles = StyleSheet.create({
     color:'#fff',
     right:45
   },
-  buttonText: {
+  prizeText: {
+    backgroundColor:'#f86e00', 
+    color:'#fff',
+    fontSize : 18,
+    height:25,
+    textAlign:'left',
+    marginLeft:10,
+     flex:1,
+  },
+    timerText: {
+    backgroundColor:'#f86e00', 
+    color:'#fff',
+    textAlign:'left',
+    fontSize : 18,
+    height:25,
+     flex:1
+  },
+      headerText: {
     backgroundColor:'#f86e00', 
     color:'#fff',
     textAlign:'center',
     fontSize : 18,
     height:25
+  },
+    positionText: {
+    backgroundColor:'#f86e00', 
+    color:'#fff',
+    fontSize : 18,
+    height:25,
+    flex:1,
+    textAlign:'right',
+    right:20
+
   },
   buttonImage : {
   	position:'absolute',

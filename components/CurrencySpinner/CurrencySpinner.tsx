@@ -183,7 +183,7 @@ export const CurrencySpinner  = (props) => {
     return (
       <View style={{ flex: 1 }} {...getPanHandler()}>
         <WheelContainer>
-          <Wheel />
+          <Wheel colorFrom={props.colorFrom} colorTo={props.colorTo}/>
         </WheelContainer>
         {/* 
           All icon's initial position is set to the center of the wheel.

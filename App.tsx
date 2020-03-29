@@ -1,7 +1,7 @@
 import * as Font from 'expo-font';
 import React, { useEffect } from 'react';
 import { fromBottom, fadeIn } from 'react-navigation-transitions';
-import { createAppContainer} from 'react-navigation';
+import { createAppContainer, NavigationEvents} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { ThemeProvider } from 'styled-components';
@@ -49,7 +49,7 @@ const clashStack = createStackNavigator(
     GameList
 },
 {
-  initialRouteName: 'ClashList',
+  initialRouteName: 'PreGameScreen',
   headerMode: 'none',
   transitionConfig: () => fadeIn()
 });
@@ -73,7 +73,7 @@ const cryptoStack = createStackNavigator({
 {
   initialRouteName: 'WalletHome',
   headerMode: 'none',
-  transitionConfig: () => fromBottom(),
+  transitionConfig: () => fadeIn(),
 });
 
 const tabNavigator = createMaterialTopTabNavigator(

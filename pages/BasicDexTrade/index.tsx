@@ -22,7 +22,7 @@ export const BasicDexTrade = withBackground(() => {
   const transactionFeeUsd = useNavigationParam('transactionFeeUsd');
   const transactionId = useNavigationParam('transactionId');
 
-   const { navigate } = useNavigation();
+   const { navigate, goBack } = useNavigation();
 
   return (
     <Container position="absolute" bottom={-64}>
@@ -45,7 +45,7 @@ export const BasicDexTrade = withBackground(() => {
           <Text color={theme.colors.ccOrange} fontSize={6}>0.2 ETH</Text>
         </Container>
         <Container position="absolute" top={-40} left={15}>
-          <TouchableOpacity onPress={() => navigate('WalletHome')}>
+          <TouchableOpacity onPress={() => goBack()}>
            <ChevronOutlineLeft />
         </TouchableOpacity>
         </Container>

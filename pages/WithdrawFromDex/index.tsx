@@ -6,12 +6,12 @@ import {
 import { Container } from '../../components/Container';
 import { Text } from '../../components/Text';
 import { Footer } from '../../components/Footer';
-import { Image } from 'react-native';
+import { Image, Animated, Dimensions,TouchableOpacity } from 'react-native';
 import { MenuIcon } from '../../components/Icons/MenuIcon';
 import { Input } from '../../components/Input';
 import { GradientCard } from '../../components/GradientCard';
 import { Button } from '../../components/Button';
-import { useNavigationParam, useNavigation } from 'react-navigation-hooks';
+import { useNavigationParam, useNavigation, useFocusEffect } from 'react-navigation-hooks';
 import { ChevronOutlineLeft } from '../../components/Icons/ChevronOutlineLeft';
 
 export const WithdrawFromDex = withBackground(() => {
@@ -21,15 +21,56 @@ export const WithdrawFromDex = withBackground(() => {
   const handleEthAmountChange = amount => {};
   const handleUsdAmountChange = amount => {};
 
-    const { navigate } = useNavigation();
+      const [scrollAmount, setScrollAmount] = useState(new Animated.Value(0));
+  const [containerOpacity, setContainerOpacity] = useState(new Animated.Value(1));
+
+    const { navigate, goBack } = useNavigation();
 
   const handlePressWithdraw = () => {
     navigate('DexTransactionComplete');
   }
 
+
+
+ const enterPage = () => {
+     Animated.timing(containerOpacity, {
+      toValue: 1,
+      duration: 400,
+    }).start();
+      Animated.timing(scrollAmount, {
+      toValue: 0,
+      duration: 0,
+    }).start();
+
+  }
+
+  useFocusEffect(() => {
+     enterPage();
+
+   });
+
+ const leavePage  = () => {
+    Animated.timing(scrollAmount, {
+        toValue: -Dimensions.get('window').height + 275,
+        duration: 800,
+      }).start(() => {
+       navigate('DexHome')
+      });
+    Animated.timing(containerOpacity, {
+      toValue: 0,
+      duration: 400,
+    }).start();   
+  };
+
   return (
     <Container height="100%">
+     <Container zIndex={-1} >
+       <Footer
+         scrollAmount={scrollAmount}
+        />
+      </Container>
       <Container flex={1} justifyContent="center" alignItems="center">
+       <Animated.View style={{opacity:containerOpacity,justifyContent:"center", alignItems:"center"}}>
         <Container p={2}>
           <Text color="white" fontSize={5}>
             Withdraw Ethereum from DEX
@@ -43,8 +84,10 @@ export const WithdrawFromDex = withBackground(() => {
         <Text color="ccOrange" fontSize={6}>
           0.2 ETH
         </Text>
+        </Animated.View>
       </Container>
-      <Container flex={1} alignItems="center">
+      <Container flex={2} alignItems="center">
+      <Animated.View style={{opacity:containerOpacity}}>
         <Container flexDirection="row" width={10}>
           <Container flex={2}>
             <Input
@@ -91,16 +134,21 @@ export const WithdrawFromDex = withBackground(() => {
         <Container width={10}>
           <Button title="Withdraw From DEX" onPress={handlePressWithdraw} />
         </Container>
+         </Animated.View>
       </Container>
-      <Container flex={1}>
-        <Footer
-        leftButtonIcon={<ChevronOutlineLeft />}
-           handleLeftButtonPress={() => navigate('WalletHome')}
-          rightButtonIcon={
-            <Image source={require('../../assets/CC-Dex-Icon.png')}/>
-          }
-        />
-      </Container>
+       <Container flex={1}></Container>
+       <Container flex={1} position='absolute' bottom={200} width="100%">
+          <Animated.View style={{opacity:containerOpacity}}>
+          <TouchableOpacity style={{position:'absolute',left:10, top:140 }}onPress={() => goBack()}>
+              <ChevronOutlineLeft />
+              </TouchableOpacity>
+              <TouchableOpacity style={{position:'absolute',top:80, right:0}} onPress={() => leavePage()}>
+               <Image source={require('../../assets/CC-Dex-Icon.png')} />
+              </TouchableOpacity>
+              </Animated.View>
+          
+ 
+          </Container>
     </Container>
   );
 }, BackgroundColor.Black);

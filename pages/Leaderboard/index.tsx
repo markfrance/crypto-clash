@@ -16,7 +16,7 @@ import Svg, { Path } from 'react-native-svg';
 
 
 import LeaderboardItem from '../../components/LeaderboardItem';
-import LeaderboardData from '../../data/demoleaderboard.json';
+import LeaderboardData from '../../data/leaderboard.json';
 import { BezierCurve } from '../../components/BezierCurve/BezierCurve';
 
 export const Leaderboard = (props) => {
@@ -29,12 +29,12 @@ export const Leaderboard = (props) => {
 
     return (
       <View style={localStyles.leaderboard}>
-        <Text style={localStyles.headerText}> YOUR FASTEST TIMES</Text>
+        <Text style={localStyles.headerText}> LEADERBOARD</Text>
         <View style={localStyles.row}>
-          <Text style={localStyles.rowText}> PLACE </Text>
-          <Text style={localStyles.rowText}> GAME </Text>
-          <Text style={localStyles.rowText}> CRYPTO </Text>
+          <Text style={localStyles.rowText}> PLAYER </Text>
           <Text style={localStyles.rowText}> TIME </Text>
+          <Text style={localStyles.rowText}> ATTEMPT </Text>
+          <Text style={localStyles.rowText}> PRIZE </Text>
         </View>
         <View style={{flex:1}}>
           <FlatList 
@@ -69,11 +69,9 @@ export const Leaderboard = (props) => {
           style={localStyles.backImage}/>
           </TouchableOpacity>
 
-           <TouchableOpacity style={localStyles.playAgain}
-            onPress={() => props.navigation.navigate('PlayGame')}
-            >
-            <Text style={localStyles.playAgainButton}> Play Again </Text>
-          </TouchableOpacity>
+
+            <Text style={localStyles.yourPosition}> Your Position</Text>
+            <Text style={localStyles.positionText}> 3rd</Text>
           </View>         
       </View>
 
@@ -83,6 +81,7 @@ export const Leaderboard = (props) => {
 var localStyles = StyleSheet.create({
   leaderboard: {
     backgroundColor: '#3b3b3b',
+    fontFamily:'Medel',
     flex:1
   },
   headerText: {
@@ -90,19 +89,22 @@ var localStyles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 30,
     textAlign: 'center',
-    color: '#ffa028'
+    color: '#ffa028',
+      fontFamily:'Medel'
   },
   waveFooter: {
     height:150,
     bottom:0
   },
   row: {
+
     fontSize:18,
     flexDirection: 'row',
     marginBottom: 15,
     color: '#ffa028'
   },
   rowText: {
+     fontFamily:'Medel',
     fontSize:18,
     flex: 1, 
     textAlign: 'center',
@@ -113,16 +115,18 @@ var localStyles = StyleSheet.create({
     height:150
   },
   yourPosition: {
+     fontFamily:'Medel',
     color: '#fff',
     position:'absolute',
     top: 35,
-    right: 40
+    right: 25
   },
   positionText: {
+     fontFamily:'Medel',
     color: '#fff',
     position:'absolute',
     top: 55,
-    right: 55,
+    right: 35,
     fontSize: 40
     
   },

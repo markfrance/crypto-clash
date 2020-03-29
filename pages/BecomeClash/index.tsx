@@ -8,7 +8,7 @@ import React, { useState, useEffect } from 'react';
 import { Container } from '../../components/Container';
 import { NotificationIcon } from '../../components/Icons/NotificationIcon'
 import { useNavigationParam, useNavigation } from 'react-navigation-hooks';
-import {View, Image, StyleSheet, TouchableHighlight} from 'react-native';
+import {View, Image, StyleSheet, TouchableHighlight, Linking} from 'react-native';
 import { Button } from '../../components/Button';
 import { theme } from '../../theme';
 import Swiper from 'react-native-swiper';
@@ -16,6 +16,10 @@ import Swiper from 'react-native-swiper';
 export const BecomeClash = withBackground(() => {
 
   const { navigate } = useNavigation();
+
+  const goToAppStore = () => {
+    Linking.openURL("https://apps.apple.com/us/app/flappy-reborn-the-bird-game/id1228763803/");
+  };
 
     return (
            <Container margin={2} justifyContent="center" alignItems="center">
@@ -40,7 +44,9 @@ export const BecomeClash = withBackground(() => {
                   <Text margin={3} color={theme.colors.ccOrange} fontSize={3}> GO BACK </Text>
                 </TouchableHighlight>
                 <Text color="white" fontSize={3}> Don't have flappy bird yet? </Text>
+                <TouchableHighlight onPress={goToAppStore}>
                 <Image source={require('../../assets/AppStore.png')}  />
+                </TouchableHighlight>
              </Container>
           </Container>
          

@@ -22,7 +22,7 @@ export const PlaceOrder = withBackground(() => {
   const transactionFeeUsd = useNavigationParam('transactionFeeUsd');
   const transactionId = useNavigationParam('transactionId');
 
-   const { navigate } = useNavigation();
+   const { navigate, goBack } = useNavigation();
 
   return (
     <Container position="absolute" bottom={-64}>
@@ -41,7 +41,7 @@ export const PlaceOrder = withBackground(() => {
       <Container position="absolute" bottom={-200} height="80%" width="100%">
 
         <Container position="absolute" top={-40} left={15}>
-          <TouchableOpacity onPress={() => navigate('WalletHome')}>
+          <TouchableOpacity onPress={() => goBack()}>
            <ChevronOutlineLeft />
         </TouchableOpacity>
         </Container>
