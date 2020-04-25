@@ -9,7 +9,7 @@ import { Wallet } from 'ethers';
 import * as Random from 'expo-random';
 import * as SecureStore from 'expo-secure-store';
 import { secureStoreKeys } from '../../consts/secureStoreKeys';
-import { ActivityIndicator } from 'react-native';
+import { Image, ActivityIndicator } from 'react-native';
 import { Button } from '../../components/Button';
 import { useNavigation } from 'react-navigation-hooks';
 
@@ -39,6 +39,7 @@ export const SetupComplete = withBackground(() => {
 
   return (
     <Container height="100%" alignItems="center">
+     
       {isLoading ? (
         <Container height="100%" justifyContent="center" alignItems="center">
           <Text color="white" fontSize={5} margin={4}>
@@ -49,6 +50,9 @@ export const SetupComplete = withBackground(() => {
       ) : (
         <Container width={10} height="100%">
           <Container flex={1} />
+           <Container flex={1} alignItems="center" >
+            <Image source={require('../../assets/CryptoClash-Logo.png')} style={{width:'80%', height:70}}/>
+           </Container> 
           <Container flex={1} alignItems="center">
             <Text color="white" fontSize={5}>
               Setup Complete

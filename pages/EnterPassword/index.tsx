@@ -10,6 +10,7 @@ import * as SecureStore from 'expo-secure-store';
 import * as Crypto from 'expo-crypto';
 import { secureStoreKeys } from '../../consts/secureStoreKeys';
 import { useNavigation } from 'react-navigation-hooks';
+import { Image } from 'react-native';
 
 export const EnterPassword = withBackground(() => {
   const [password, setPassword] = useState('');
@@ -54,6 +55,7 @@ export const EnterPassword = withBackground(() => {
           </Container>
         )} */}
         <Container flex={1} justifyContent="center">
+        
           <Container my={3}>
             <Input
               label="Enter Password"

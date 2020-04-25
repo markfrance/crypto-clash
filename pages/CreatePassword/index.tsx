@@ -3,6 +3,7 @@ import {
   withBackground,
   BackgroundColor,
 } from '../../components/withBackground';
+import { Image } from 'react-native';
 import { Container } from '../../components/Container';
 import { Text } from '../../components/Text';
 import { Input } from '../../components/Input';
@@ -41,9 +42,14 @@ export const CreatePassword = withBackground(() => {
 
   return (
     <Container height="100%" alignItems="center">
-      <Container width={10} height="100%">
-        <Container flex={1} />
-        <Container flex={1} justifyContent="center">
+    
+      <Container width={10} flex={1}>
+      <Container flex={1} />
+      <Container flex={1} alignItems="center" >
+          <Image source={require('../../assets/CryptoClash-Logo.png')} style={{width:'80%', height:70}}/>
+    </Container> 
+        
+        <Container flex={2} justifyContent="center">
           <Input
             label="Create Password"
             value={password}
@@ -57,7 +63,7 @@ export const CreatePassword = withBackground(() => {
             secureTextEntry
           />
         </Container>
-        <Container flex={1} justifyContent="center">
+        <Container flex={2} justifyContent="center">
           <Button title="Save" onPress={handleSaveButtonPress} />
           <Button
             title="Skip Password"
@@ -65,12 +71,12 @@ export const CreatePassword = withBackground(() => {
             variant="text"
           />
         </Container>
-        <Container flex={1} alignItems="center">
+        <Container flex={2} alignItems="center">
           <Text fontSize={5} color="grey1" my={2}>
             Important!
           </Text>
           <Text fontSize={4} color="grey2">
-            We do not keep as copy of your password. If you forget it, it cannot
+            We do not save a copy of your password. If you forget it, it cannot
             be recovered.
           </Text>
         </Container>

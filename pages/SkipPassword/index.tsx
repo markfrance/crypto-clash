@@ -7,6 +7,7 @@ import { Container } from '../../components/Container';
 import { Text } from '../../components/Text';
 import { useNavigation } from 'react-navigation-hooks';
 import { Button } from '../../components/Button';
+import { Image } from 'react-native';
 
 export const SkipPassword = withBackground(() => {
   const { navigate } = useNavigation();
@@ -14,6 +15,9 @@ export const SkipPassword = withBackground(() => {
     <Container height="100%" alignItems="center">
       <Container width={10} height="100%">
         <Container flex={1} />
+         <Container flex={1} alignItems="center" >
+        <Image source={require('../../assets/CryptoClash-Logo.png')} style={{width:'80%', height:70}}/>
+      </Container> 
         <Container flex={1} alignItems="center">
           <Text fontSize={5} color="grey1" my={2}>
             Important!

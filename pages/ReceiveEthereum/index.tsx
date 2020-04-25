@@ -96,7 +96,7 @@ export const ReceiveEthereum = withBackground(() => {
               </TouchableOpacity>
               <TouchableOpacity style={{position:'absolute',top:80, right:10}} onPress={() => Clipboard.setString(walletAddress)}>
                <CopyIcon/>
-               <Text>Copy Address</Text>
+               <Text style={{color:'white', right:10}}>Copy Address</Text>
               </TouchableOpacity>
               </Animated.View>
           

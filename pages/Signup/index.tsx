@@ -10,12 +10,14 @@ import { Text } from '../../components/Text';
 import { Button } from '../../components/Button';
 import { Container } from '../../components/Container';
 import { secureStoreKeys } from '../../consts/secureStoreKeys';
+import { Image } from 'react-native';
 
 export const Signup = withBackground(() => {
   const [username, setUsername] = useState('');
   const { navigate } = useNavigation();
 
   useEffect(() => {
+
     const checkForExistingUser = async () => {
       const username = await SecureStore.getItemAsync(
         secureStoreKeys.CRYPTO_CLASH_USERNAME
@@ -33,7 +35,8 @@ export const Signup = withBackground(() => {
         // navigate('Wallet');
       }
     };
-    checkForExistingUser();
+  // checkForExistingUser();
+  
   });
 
   const handleJoinButtonPress = async () => {
@@ -49,7 +52,10 @@ export const Signup = withBackground(() => {
   return (
     <Container height="100%" alignItems="center">
       <Container width={10} height="100%">
-        <Container flex={2} />
+        <Container flex={1} />
+        <Container flex={1} alignItems="center" >
+          <Image source={require('../../assets/CryptoClash-Logo.png')} style={{width:'80%', height:70}}/>
+        </Container> 
         <Container flex={1}>
           <Input
             label="Enter Username"

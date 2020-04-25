@@ -196,8 +196,8 @@ export const SendEthereum = withBackground(() => {
               <ChevronOutlineLeft/>
               </TouchableOpacity>
               <TouchableOpacity style={{position:'absolute',top:80, right:0}} onPress={() => leavePage()}>
-              <QRCodeIcon/>
-              <Text>Scan QR Code</Text>
+              <QRCodeIcon large/>
+              <Text style={{color:'white', right:10}}>Scan QR Code</Text>
               </TouchableOpacity>
               </Animated.View>
           

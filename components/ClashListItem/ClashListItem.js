@@ -101,7 +101,7 @@ export default class ClashListItem extends Component {
     if(this.props.clashItem.open){
       return(
         <View>
-         <Image source={require('../../assets/GameTimerIcon.png')}
+         <Image source={require('../../assets/ParachuteIcon.png')}
           style={localStyles.clockIcon} />
           <Text style={localStyles.airdropTimer}>{this.props.clashItem.participants}</Text> 
           <Image source={require('../../assets/EmptyIcon.png')}
@@ -149,9 +149,9 @@ var localStyles = StyleSheet.create({
   airdropTimer: {
     fontSize: 12,
     position:'absolute', 
-    top:30,
+    top:15,
     color:'#fff',
-    right:45
+    right:40
   },
   prizeText: {
     backgroundColor:'#f86e00', 
@@ -204,7 +204,7 @@ var localStyles = StyleSheet.create({
   },
   clockIcon : {
   	position:'absolute', 
-    top:30,
+    top:10,
     right:5,
     width:25, 
     height:25
@@ -212,12 +212,12 @@ var localStyles = StyleSheet.create({
   percentAmount : {
     position:'absolute', 
     fontSize: 8,
-    top: 37,
+    top: 17,
     left: 7
   },
   percentIcon : {
     position:'absolute', 
-    top:30,
+    top:10,
     left:5,
     width:25, 
     height:25

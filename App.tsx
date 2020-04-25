@@ -49,7 +49,7 @@ const clashStack = createStackNavigator(
     GameList
 },
 {
-  initialRouteName: 'PreGameScreen',
+  initialRouteName: 'ClashList',
   headerMode: 'none',
   transitionConfig: () => fadeIn()
 });
@@ -115,7 +115,7 @@ const appNavigator = createStackNavigator({
     HowTo
   },
   {
-    initialRouteName: 'tabNavigator',
+    initialRouteName: 'Signup',
     headerMode: 'none'
   }
 );
